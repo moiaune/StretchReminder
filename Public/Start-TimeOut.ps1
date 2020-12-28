@@ -2,22 +2,33 @@ function Start-TimeOut {
     [CmdletBinding()]
     param (
         [Parameter()]
-        [Int]
-        $Interval
+        [double]
+        $Interval = 15,
+
+        [Parameter()]
+        [int]
+        $StretchTime = 15
     )
 
     begin {
-
+        $uniqueId = New-Guid
     }
 
     process {
-        # 1. Start new job with a script block
-        # 2. while $true: Sleep $Interval, then display toast notification and start over.
-        # Extra: Maybe get a 10 second countdown bar in the notification?
-    }
+        while ($true) {
+            Start-Sleep -Seconds ($Interval * 60)
 
-    end {
-        
+            $DataBinding = @{
+                'ProgressBarValue'        = 0
+                'ProgressBarValueDisplay' = "0 seconds"
+            }
+
+            $Progress = New-BTProgressBar -Status "Stretch, stretch, stretch!" -Value 'ProgressBarValue'  -ValueDisplay 'ProgressBarValueDisplay'
+
+            New-BurntToastNotification -UniqueIdentifier $uniqueId -ProgressBar $Progress -DataBinding $DataBinding
+            
+            Start-TimeOutCountdown -DataBinding $DataBinding -UniqueId $uniqueId -Duration $StretchTime
+        }
     }
 
 }
