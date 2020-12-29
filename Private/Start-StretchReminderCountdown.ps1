@@ -37,8 +37,7 @@ function Start-StretchReminderCountdown {
 
             if ($percentDone -le 1) {
                 $DataBinding['ProgressBarValueDisplay'] = '{0:n0} seconds remaining' -f $secondsRemaining
-            }
-            else {
+            } else {
                 $DataBinding['ProgressBarValueDisplay'] = 'Done'
             }
 
