@@ -15,17 +15,17 @@ function Import-ModuleFile {
 if ($tvbot_dotsourcemodule) { $script:doDotSource }
 
 # Import all internal functions
-foreach ($function in (Get-ChildItem "$ModuleRoot\private\" -Filter "*.ps1" -Recurse -ErrorAction Ignore)) {
+foreach ($function in (Get-ChildItem "$ModuleRoot\Private\" -Filter "*.ps1" -Recurse -ErrorAction Ignore)) {
     . Import-ModuleFile -Path $function.FullName
 }
 
 # Import all public functions
-foreach ($function in (Get-ChildItem "$ModuleRoot\public" -Filter "*.ps1" -Recurse -ErrorAction Ignore)) {
+foreach ($function in (Get-ChildItem "$ModuleRoot\Public" -Filter "*.ps1" -Recurse -ErrorAction Ignore)) {
     . Import-ModuleFile -Path $function.FullName
 }
 
 if (Get-Command -Name New-BurntToastNotification -Module BurntToast -ErrorAction SilentlyContinue) {
     # sqlite shared cache
-    $script:burnt = $true
+    $script:hasBurntToast = $true
     $script:cache = @{}
 }

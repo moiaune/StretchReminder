@@ -41,31 +41,37 @@ function Start-StretchReminder {
             Write-Verbose "Sleeping for $($Interval * 60) seconds"
             Start-Sleep -Seconds ($Interval * 60)
 
-            $DataBinding = @{
-                'ProgressBarValue'        = 0
-                'ProgressBarValueDisplay' = '0 seconds'
-            }
-
-            $ProgressBarSplat = @{
-                Status       = 'Stretch aaand stretch..'
-                Value        = 'ProgressBarValue'
-                ValueDisplay = 'ProgressBarValueDisplay'
-            }
-
-            $Progress = New-BTProgressBar @ProgressBarSplat
             
-            $ToastSplat = @{
-                Text             = 'TIME TO STRETCH!', 'Remove your hands from the keyboard and stretch your arms and neck!'
-                UniqueIdentifier = $uniqueId
-                ProgressBar      = $Progress
-                DataBinding      = $DataBinding
-                HeroImage        = Join-Path -Path $script:ModuleRoot -ChildPath 'stretch.gif'
+            if ($script:hasBurntToast) {
+                $DataBinding = @{
+                    'ProgressBarValue'        = 0
+                    'ProgressBarValueDisplay' = '0 seconds'
+                }
+    
+                $ProgressBarSplat = @{
+                    Status       = 'Stretch aaand stretch..'
+                    Value        = 'ProgressBarValue'
+                    ValueDisplay = 'ProgressBarValueDisplay'
+                }
+    
+                $Progress = New-BTProgressBar @ProgressBarSplat
+                
+                $ToastSplat = @{
+                    Text             = 'TIME TO STRETCH!', 'Remove your hands from the keyboard and stretch your arms and neck!'
+                    UniqueIdentifier = $uniqueId
+                    ProgressBar      = $Progress
+                    DataBinding      = $DataBinding
+                    HeroImage        = Join-Path -Path $script:ModuleRoot -ChildPath 'stretch.gif'
+                }
+                
+                Write-Verbose 'Showing notification'
+                New-BurntToastNotification @ToastSplat
+                Start-StretchReminderCountdown -DataBinding $DataBinding -UniqueId $uniqueId -Duration $Duration
+            } else {
+                #TODO: Find a solution for systems that does not have BurntToast installed. Maybe PoshNotify?
             }
-            
-            Write-Verbose 'Showing notification'
-            New-BurntToastNotification @ToastSplat
 
-            Start-StretchReminderCountdown -DataBinding $DataBinding -UniqueId $uniqueId -Duration $Duration
+
         }
     }
 
