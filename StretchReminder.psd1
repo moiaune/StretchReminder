@@ -21,19 +21,19 @@
     GUID              = '7674e9e9-9fb0-48b6-8422-0a6b2fb8fad8'
 
     # Author of this module
-    Author            = '@dotpwsh'
+    Author            = 'Mads Moi-Aune'
 
     # Company or vendor of this module
     CompanyName       = 'dotpwsh'
 
     # Copyright statement for this module
-    Copyright         = 'dotpwsh'
+    Copyright         = '(c) 2020 Mads Moi-Aune.'
 
     # Description of the functionality provided by this module
     # Description = ''
 
     # Minimum version of the PowerShell engine required by this module
-    # PowerShellVersion = ''
+    PowerShellVersion = '5.1'
 
     # Name of the PowerShell host required by this module
     # PowerShellHostName = ''
@@ -95,13 +95,13 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags       = @('Stretch', 'Timeout', 'Reminder', 'Break')
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri = 'https://github.com/madsaune/StretchReminder/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri = 'https://github.com/madsaune/StretchReminder'
 
             # A URL to an icon representing this module.
             # IconUri = ''
