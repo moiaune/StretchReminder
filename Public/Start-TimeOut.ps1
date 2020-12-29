@@ -7,27 +7,44 @@ function Start-TimeOut {
 
         [Parameter()]
         [int]
-        $StretchTime = 15
+        $Duration = 15
     )
 
     begin {
         $uniqueId = New-Guid
+        Write-Verbose "UniqueId: $($uniqueId)"
     }
 
     process {
         while ($true) {
+            Write-Verbose "Sleeping for $($Interval * 60) seconds"
             Start-Sleep -Seconds ($Interval * 60)
 
             $DataBinding = @{
                 'ProgressBarValue'        = 0
-                'ProgressBarValueDisplay' = "0 seconds"
+                'ProgressBarValueDisplay' = '0 seconds'
             }
 
-            $Progress = New-BTProgressBar -Status "Stretch, stretch, stretch!" -Value 'ProgressBarValue'  -ValueDisplay 'ProgressBarValueDisplay'
+            $ProgressBarSplat = @{
+                Status       = 'Stretch aaand stretch..'
+                Value        = 'ProgressBarValue'
+                ValueDisplay = 'ProgressBarValueDisplay'
+            }
 
-            New-BurntToastNotification -UniqueIdentifier $uniqueId -ProgressBar $Progress -DataBinding $DataBinding
+            $Progress = New-BTProgressBar @ProgressBarSplat
             
-            Start-TimeOutCountdown -DataBinding $DataBinding -UniqueId $uniqueId -Duration $StretchTime
+            $ToastSplat = @{
+                Text             = 'TIME TO STRETCH!', 'Remove your hands from the keyboard and stretch your arms and neck!'
+                UniqueIdentifier = $uniqueId
+                ProgressBar      = $Progress
+                DataBinding      = $DataBinding
+                HeroImage        = Join-Path -Path $script:ModuleRoot -ChildPath 'stretch.gif'
+            }
+            
+            Write-Verbose 'Showing notification'
+            New-BurntToastNotification @ToastSplat
+
+            Start-TimeOutCountdown -DataBinding $DataBinding -UniqueId $uniqueId -Duration $Duration
         }
     }
 
