@@ -1,10 +1,10 @@
-function Start-TimeOut {
+function Start-StretchReminder {
     <#
     .SYNOPSIS
-        Starts the TimeOut module
+        Starts the StretchReminder module
     
     .DESCRIPTION
-        The Start-TimeOut function starts the timer that sleeps for x minutes (interval) and then displays a notification with a countdown in y seconds (duration).
+        The Start-StretchReminder function starts the timer that sleeps for x minutes (interval) and then displays a notification with a countdown in y seconds (duration).
     
     .PARAMETER Interval
         The interval between each notification.
@@ -13,11 +13,11 @@ function Start-TimeOut {
         The duration of the countdown on the notification.
     
     .EXAMPLE
-        PS C:\> Start-TimeOut -Interval 15 -Duration 15
-        Starts the TimeOut module with a 15 minutes interval and 15 seconds countdown.
+        PS C:\> Start-StretchReminder -Interval 15 -Duration 15
+        Starts the StretchReminder module with a 15 minutes interval and 15 seconds countdown.
     
     .LINK
-        https://github.com/madsaune/TimeOut/blob/main/Public/Start-TimeOut.ps1
+        https://github.com/madsaune/StretchReminder/blob/main/Public/Start-StretchReminder.ps1
     #>
 
     [CmdletBinding()]
@@ -65,7 +65,7 @@ function Start-TimeOut {
             Write-Verbose 'Showing notification'
             New-BurntToastNotification @ToastSplat
 
-            Start-TimeOutCountdown -DataBinding $DataBinding -UniqueId $uniqueId -Duration $Duration
+            Start-StretchReminderCountdown -DataBinding $DataBinding -UniqueId $uniqueId -Duration $Duration
         }
     }
 

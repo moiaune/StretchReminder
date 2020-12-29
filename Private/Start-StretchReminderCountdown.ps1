@@ -1,4 +1,4 @@
-function Start-TimeOutCountdown {
+function Start-StretchReminderCountdown {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
