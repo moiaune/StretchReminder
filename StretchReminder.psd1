@@ -30,7 +30,7 @@
     Copyright         = '(c) 2020 Mads (dotpwsh) Moi-Aune.'
 
     # Description of the functionality provided by this module
-    # Description = ''
+    Description       = 'A basic break reminder module that remind you to stretch every x minutes.'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion = '5.1'
