@@ -21,13 +21,13 @@
     GUID              = '7674e9e9-9fb0-48b6-8422-0a6b2fb8fad8'
 
     # Author of this module
-    Author            = 'Mads Moi-Aune'
+    Author            = 'Mads (dotpwsh) Moi-Aune'
 
     # Company or vendor of this module
     CompanyName       = 'dotpwsh'
 
     # Copyright statement for this module
-    Copyright         = '(c) 2020 Mads Moi-Aune.'
+    Copyright         = '(c) 2020 Mads (dotpwsh) Moi-Aune.'
 
     # Description of the functionality provided by this module
     # Description = ''
