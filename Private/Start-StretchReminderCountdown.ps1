@@ -1,5 +1,5 @@
 function Start-StretchReminderCountdown {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory)]
         [int]

@@ -20,7 +20,7 @@ function Start-StretchReminder {
         https://github.com/madsaune/StretchReminder/blob/main/Public/Start-StretchReminder.ps1
     #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter()]
         [double]
