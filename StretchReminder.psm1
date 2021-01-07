@@ -1,31 +1,18 @@
-$script:ModuleRoot = $PSScriptRoot
+$script:moduleRoot = $PSScriptRoot
 
-function Import-ModuleFile {
-    [CmdletBinding()]
-    Param (
-        [string]
-        $Path
-    )
+# Import everything in these folders
+foreach ($folder in @('private', 'public')) {
+    $f = Join-Path -Path $PSScriptRoot -ChildPath $folder
+    if (Test-Path -Path $f) {
+        Write-Verbose "processing folder $f"
+        $files = Get-ChildItem -Path $f -Filter *.ps1
 
-    if ($doDotSource) { . $Path }
-    else { $ExecutionContext.InvokeCommand.InvokeScript($false, ([scriptblock]::Create([io.file]::ReadAllText($Path))), $null, $null) }
-}
-
-# Detect whether at some level dotsourcing was enforced
-if ($tvbot_dotsourcemodule) { $script:doDotSource }
-
-# Import all internal functions
-foreach ($function in (Get-ChildItem "$ModuleRoot\Private\" -Filter "*.ps1" -Recurse -ErrorAction Ignore)) {
-    . Import-ModuleFile -Path $function.FullName
-}
-
-# Import all public functions
-foreach ($function in (Get-ChildItem "$ModuleRoot\Public" -Filter "*.ps1" -Recurse -ErrorAction Ignore)) {
-    . Import-ModuleFile -Path $function.FullName
+        # dot source each file
+        $files | where-Object { $_.name -NotLike '*.Tests.ps1' } |
+        ForEach-Object { Write-Verbose $_.name; . $_.FullName }
+    }
 }
 
 if (Get-Command -Name New-BurntToastNotification -Module BurntToast -ErrorAction SilentlyContinue) {
-    # sqlite shared cache
     $script:hasBurntToast = $true
-    $script:cache = @{}
 }

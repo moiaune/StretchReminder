@@ -61,7 +61,7 @@ function Start-StretchReminder {
                     UniqueIdentifier = $uniqueId
                     ProgressBar      = $Progress
                     DataBinding      = $DataBinding
-                    HeroImage        = Join-Path -Path $script:ModuleRoot -ChildPath 'stretch.gif'
+                    HeroImage        = Join-Path -Path $script:moduleRoot -ChildPath 'stretch.gif'
                 }
                 
                 Write-Verbose 'Showing notification'
